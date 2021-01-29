@@ -19,16 +19,19 @@ const COACHES = [
     areas: ["frontend", "career"],
     description:
       "I am Julie and as a senior developer in a big tech company, I can help you get your first job or progress in your current role.",
-    hourlyRate: 30,
+    hourlyRate: 45,
   },
 ];
 
 export default {
   namespaced: true,
-  state() {
-    return {
-      coaches: COACHES,
-    };
+  // state() {
+  //   return {
+  //     coaches: COACHES,
+  //   };
+  // },
+  state: {
+    coaches: COACHES,
   },
   mutations,
   actions,

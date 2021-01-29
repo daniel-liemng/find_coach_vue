@@ -1,5 +1,5 @@
 <template>
-  <h2>dd</h2>
+  <h2>Not Found</h2>
 </template>
 
 <script>
