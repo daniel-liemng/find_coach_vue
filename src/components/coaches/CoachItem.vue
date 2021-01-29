@@ -4,9 +4,12 @@
       <h5 class="card-title">{{ fullName }}</h5>
       <p class="card-text">${{ hourlyRate }}/hour</p>
       <div class="areas">
-        <span v-for="(area, index) in areas" :key="index" class="area">{{
-          area
-        }}</span>
+        <span
+          v-for="(area, index) in areas"
+          :key="index"
+          class="area fw-bold"
+          >{{ area }}</span
+        >
       </div>
       <div class="d-flex justify-content-end">
         <router-link :to="coachContactLink" class="btn btn-primary"
