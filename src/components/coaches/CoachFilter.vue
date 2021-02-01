@@ -37,7 +37,6 @@
       <label class="btn btn-outline-primary" for="career">Career</label>
     </div>
   </div>
-  <pre>{{ JSON.stringify(filters) }}</pre>
 </template>
 
 <script>
