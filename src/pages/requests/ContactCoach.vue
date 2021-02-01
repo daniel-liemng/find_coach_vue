@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container request-form">
     <h3 class="text-center">Contact</h3>
     <form @submit.prevent="handleSubmit">
       <div class="mb-3">
@@ -54,18 +54,27 @@ export default {
         return;
       }
 
-      const formData = {
-        email: this.email.val,
-        message: this.message.val,
-      };
+      // dispatch action
+      this.$store.dispatch("requests/contactCoach", {
+        email: this.email,
+        message: this.message,
+        coachId: this.$route.params.id,
+      });
 
-      this.$emit("form-data", formData);
+      // redirect
+      this.$router.replace("/coaches");
     },
   },
 };
 </script>
 
 <style scoped>
+.request-form {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid orange;
+  border-radius: 5px;
+}
 .invalid {
   border-color: red;
 }

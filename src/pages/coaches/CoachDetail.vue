@@ -21,11 +21,11 @@
         </div>
         <div class="card-footer">
           <h5>Interested? Reach out now</h5>
-          <router-view />
           <router-link :to="contactLink" class="btn btn-warning"
             >Contact</router-link
           >
         </div>
+        <router-view />
       </div>
     </div>
   </div>
