@@ -86,6 +86,7 @@
 
 <script>
 export default {
+  emits: ["form-data"],
   data() {
     return {
       firstName: "",
@@ -105,7 +106,7 @@ export default {
         areas: this.areas,
       };
 
-      console.log(formData);
+      this.$emit("form-data", formData);
     },
   },
 };

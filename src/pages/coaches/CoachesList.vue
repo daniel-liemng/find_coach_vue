@@ -5,7 +5,7 @@
   <section class="list-section container bg-light">
     <div class="d-flex justify-content-around mb-5">
       <button class="btn btn-success">Refresh</button>
-      <router-link to="/register" class="btn btn-success"
+      <router-link v-if="!isCoach" to="/register" class="btn btn-success"
         >Register a coach</router-link
       >
     </div>
@@ -34,7 +34,7 @@ export default {
     CoachItem,
     CoachFilter,
   },
-  data: function() {
+  data() {
     return {
       activeFilters: {
         frontend: true,
@@ -63,6 +63,9 @@ export default {
     },
     hasCoaches() {
       return this.$store.getters["coaches/hasCoaches"];
+    },
+    isCoach() {
+      return this.$store.getters["coaches/isCoach"];
     },
   },
   methods: {
