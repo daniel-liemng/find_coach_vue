@@ -1,7 +1,9 @@
 export default {
-  registerCoach(context, data) {
+  async registerCoach(context, data) {
+    const userId = context.rootGetters.userId;
+
     const coachData = {
-      id: context.rootGetters.userId,
+      // id: context.rootGetters.userId,
       firstName: data.first,
       lastName: data.last,
       description: data.desc,
@@ -9,6 +11,23 @@ export default {
       areas: data.areas,
     };
 
-    context.commit("registerCoach", coachData);
+    // HTTP request
+    const res = await fetch(
+      `https://devmeetup-vue-26ab8.firebaseio.com/coaches/${userId}.json`,
+      {
+        method: "PUT",
+        body: JSON.stringify(coachData),
+      }
+    );
+
+    console.log("aaRes", res);
+
+    // const data = await res.json();
+
+    if (!res.ok) {
+      // error
+    }
+
+    context.commit("registerCoach", { ...coachData, id: userId });
   },
 };
