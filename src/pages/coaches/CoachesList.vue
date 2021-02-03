@@ -5,12 +5,19 @@
   <section class="list-section container bg-light">
     <div class="d-flex justify-content-around mb-5">
       <button class="btn btn-success" @click="loadCoaches">Refresh</button>
-      <router-link v-if="!isCoach" to="/register" class="btn btn-success"
+      <router-link
+        v-if="!isCoach && !isLoading"
+        to="/register"
+        class="btn btn-success"
         >Register a coach</router-link
       >
     </div>
 
-    <ul v-if="hasCoaches" class="container">
+    <div v-if="isLoading">
+      <Loading />
+    </div>
+
+    <ul v-else-if="hasCoaches" class="container">
       <CoachItem
         v-for="coach in filteredCoaches"
         :key="coach.id"
@@ -28,14 +35,17 @@
 <script>
 import CoachItem from "../../components/coaches/CoachItem.vue";
 import CoachFilter from "../../components/coaches/CoachFilter.vue";
+import Loading from "../../components/ui/Loading.vue";
 
 export default {
   components: {
     CoachItem,
     CoachFilter,
+    Loading,
   },
   data() {
     return {
+      isLoading: false,
       activeFilters: {
         frontend: true,
         backend: true,
@@ -62,7 +72,7 @@ export default {
       });
     },
     hasCoaches() {
-      return this.$store.getters["coaches/hasCoaches"];
+      return !this.isLoading && this.$store.getters["coaches/hasCoaches"];
     },
     isCoach() {
       return this.$store.getters["coaches/isCoach"];
@@ -75,8 +85,12 @@ export default {
     setFilters(updatedFilters) {
       this.activeFilters = updatedFilters;
     },
-    loadCoaches() {
-      this.$store.dispatch("coaches/loadCoaches");
+    async loadCoaches() {
+      this.isLoading = true;
+
+      await this.$store.dispatch("coaches/loadCoaches");
+
+      this.isLoading = false;
     },
   },
 };
