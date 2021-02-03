@@ -4,7 +4,7 @@
   </section>
   <section class="list-section container bg-light">
     <div class="d-flex justify-content-around mb-5">
-      <button class="btn btn-success">Refresh</button>
+      <button class="btn btn-success" @click="loadCoaches">Refresh</button>
       <router-link v-if="!isCoach" to="/register" class="btn btn-success"
         >Register a coach</router-link
       >
@@ -68,9 +68,15 @@ export default {
       return this.$store.getters["coaches/isCoach"];
     },
   },
+  created() {
+    this.loadCoaches();
+  },
   methods: {
     setFilters(updatedFilters) {
       this.activeFilters = updatedFilters;
+    },
+    loadCoaches() {
+      this.$store.dispatch("coaches/loadCoaches");
     },
   },
 };
