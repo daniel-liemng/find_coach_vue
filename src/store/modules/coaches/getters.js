@@ -11,4 +11,19 @@ export default {
     const userId = rootGetters.userId;
     return coaches.some((coach) => coach.id === userId);
   },
+  // cache
+  shouldUpdate(state) {
+    const lastFetch = state.lastFetch;
+
+    if (!lastFetch) {
+      // should update if no timestamp
+      return true;
+    }
+
+    // update every a minute
+    const currentTimestamp = new Date().getTime();
+
+    // should update if true
+    return (currentTimestamp - lastFetch) / 1000 > 60;
+  },
 };

@@ -4,7 +4,9 @@
   </section>
   <section class="list-section container bg-light">
     <div class="d-flex justify-content-around mb-5">
-      <button class="btn btn-success" @click="loadCoaches">Refresh</button>
+      <button class="btn btn-success" @click="loadCoaches(true)">
+        Refresh
+      </button>
       <router-link
         v-if="!isCoach && !isLoading"
         to="/register"
@@ -91,11 +93,15 @@ export default {
     setFilters(updatedFilters) {
       this.activeFilters = updatedFilters;
     },
-    async loadCoaches() {
+    // refresh for no cache
+    async loadCoaches(refresh = false) {
       this.isLoading = true;
 
       try {
-        await this.$store.dispatch("coaches/loadCoaches");
+        // payload: forceRefresh for Refresh Btn
+        await this.$store.dispatch("coaches/loadCoaches", {
+          forceRefresh: refresh,
+        });
       } catch (err) {
         this.error = err.message || "Something went wrong!";
       }

@@ -32,6 +32,7 @@ export default {
   // },
   state: {
     coaches: COACHES,
+    lastFetch: null,
   },
   mutations,
   actions,

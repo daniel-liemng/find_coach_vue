@@ -31,7 +31,12 @@ export default {
     context.commit("registerCoach", { ...coachData, id: userId });
   },
   //// FETCH COACHES
-  async loadCoaches(context) {
+  // payload.forceRefesh -> for Refesh Btn -> fetch data without caching
+  async loadCoaches(context, payload) {
+    if (!payload.forceRefresh && !context.getters.shouldUpdate) {
+      return;
+    }
+
     const res = await fetch(
       `https://devmeetup-vue-26ab8.firebaseio.com/coaches.json`
     );
@@ -61,5 +66,6 @@ export default {
     }
 
     context.commit("setCoaches", coaches);
+    context.commit("setFetchTimestamp");
   },
 };
