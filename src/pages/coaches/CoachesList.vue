@@ -98,6 +98,7 @@ export default {
     // refresh for no cache
     async loadCoaches(refresh = false) {
       this.isLoading = true;
+      this.error = null;
 
       try {
         // payload: forceRefresh for Refresh Btn

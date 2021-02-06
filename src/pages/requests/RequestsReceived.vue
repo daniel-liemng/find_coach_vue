@@ -52,6 +52,7 @@ export default {
   methods: {
     async loadRequests() {
       this.isLoading = true;
+      this.error = null;
 
       try {
         await this.$store.dispatch("requests/fetchRequests");
