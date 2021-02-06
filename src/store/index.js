@@ -22,7 +22,7 @@ const store = createStore({
   state() {
     return {
       // Authentication
-      userId: "c3",
+      userId: "c2",
     };
   },
   getters: {
