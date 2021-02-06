@@ -3,9 +3,10 @@ import actions from "./actions.js";
 import getters from "./getters.js";
 
 export default {
-  namespaced: true,
   state: {
-    userId: "c2",
+    userId: null,
+    token: null,
+    tokenExpiration: null,
   },
 
   mutations,
