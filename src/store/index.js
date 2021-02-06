@@ -21,6 +21,7 @@ const store = createStore({
   },
   state() {
     return {
+      // Authentication
       userId: "c3",
     };
   },

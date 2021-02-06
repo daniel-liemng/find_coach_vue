@@ -21,7 +21,7 @@
       <Loading />
     </div>
 
-    <ul v-else-if="hasCoaches" class="container">
+    <ul v-else-if="hasCoaches && !isLoading" class="container">
       <CoachItem
         v-for="coach in filteredCoaches"
         :key="coach.id"
@@ -32,6 +32,7 @@
         :areas="coach.areas"
       />
     </ul>
+
     <h3 v-else>No coaches</h3>
   </section>
 </template>

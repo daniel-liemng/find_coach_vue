@@ -38,6 +38,7 @@ export default {
 
     const data = await res.json();
 
+    // Error handling
     if (!res.ok) {
       // error
       const error = new Error(data.message || "Failed to fetch coaches");

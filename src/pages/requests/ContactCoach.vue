@@ -23,11 +23,18 @@
       </div>
 
       <!-- Validation Info -->
-      <p v-if="!formIsValid" style="color: red">
-        ** Please fix the above errors and submit again **
+      <p v-if="!formIsValid" class="error">
+        ** Please fix the above input errors and submit again **
       </p>
 
-      <button type="submit" class="btn btn-primary">Send message</button>
+      <!-- Show error of dispatching action -->
+      <div v-show="error" class=" mb-3 error">
+        {{ error }}
+      </div>
+
+      <button type="submit" class="btn btn-primary" :disabled="!!isLoading">
+        Send message
+      </button>
     </form>
   </div>
 </template>
@@ -39,10 +46,12 @@ export default {
       email: "",
       message: "",
       formIsValid: true,
+      isLoading: false,
+      error: null,
     };
   },
   methods: {
-    handleSubmit() {
+    async handleSubmit() {
       this.formIsValid = true;
 
       if (
@@ -54,15 +63,28 @@ export default {
         return;
       }
 
-      // dispatch action
-      this.$store.dispatch("requests/contactCoach", {
-        email: this.email,
-        message: this.message,
-        coachId: this.$route.params.id,
-      });
+      // before dispatch action
+      this.isLoading = true;
+      this.error = null;
+
+      // dispatch action -> wait for the result of dispatch to see success or error
+      try {
+        await this.$store.dispatch("requests/contactCoach", {
+          email: this.email,
+          message: this.message,
+          coachId: this.$route.params.id,
+        });
+      } catch (err) {
+        this.error = err.message || "Something went wrong!";
+      }
+
+      // after dispatch action
+      this.isLoading = false;
 
       // redirect
-      this.$router.replace("/coaches");
+      if (!this.error) {
+        this.$router.replace("/coaches");
+      }
     },
   },
 };
@@ -77,5 +99,12 @@ export default {
 }
 .invalid {
   border-color: red;
+}
+.error {
+  background-color: pink;
+  color: red;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  width: 50%;
 }
 </style>
