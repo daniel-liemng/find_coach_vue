@@ -1,6 +1,8 @@
 <template>
-  <h2 class="text-center mt-4 mb-3">Register as a coach now</h2>
-  <CoachForm @form-data="saveData" />
+  <div>
+    <h2 class="text-center mt-4 mb-3">Register as a coach now</h2>
+    <CoachForm @form-data="saveData" />
+  </div>
 </template>
 
 <script>

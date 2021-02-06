@@ -1,42 +1,44 @@
 <template>
-  <section>
-    <CoachFilter @change-filter="setFilters" />
-  </section>
-  <section class="list-section container bg-light">
-    <div class="d-flex justify-content-around mb-5">
-      <button class="btn btn-success" @click="loadCoaches(true)">
-        Refresh
-      </button>
-      <router-link
-        v-if="!isCoach && !isLoading"
-        to="/register"
-        class="btn btn-success"
-        >Register a coach</router-link
-      >
-    </div>
+  <div>
+    <section>
+      <CoachFilter @change-filter="setFilters" />
+    </section>
+    <section class="list-section container bg-light">
+      <div class="d-flex justify-content-around mb-5">
+        <button class="btn btn-success" @click="loadCoaches(true)">
+          Refresh
+        </button>
+        <router-link
+          v-if="!isCoach && !isLoading"
+          to="/register"
+          class="btn btn-success"
+          >Register a coach</router-link
+        >
+      </div>
 
-    <div v-show="error" class="container mb-3 error">
-      {{ error }}
-    </div>
+      <div v-show="error" class="container mb-3 error">
+        {{ error }}
+      </div>
 
-    <div v-if="isLoading">
-      <Loading />
-    </div>
+      <div v-if="isLoading">
+        <Loading />
+      </div>
 
-    <ul v-else-if="hasCoaches && !isLoading" class="container">
-      <CoachItem
-        v-for="coach in filteredCoaches"
-        :key="coach.id"
-        :id="coach.id"
-        :firstName="coach.firstName"
-        :lastName="coach.lastName"
-        :hourlyRate="coach.hourlyRate"
-        :areas="coach.areas"
-      />
-    </ul>
+      <ul v-else-if="hasCoaches && !isLoading" class="container">
+        <CoachItem
+          v-for="coach in filteredCoaches"
+          :key="coach.id"
+          :id="coach.id"
+          :firstName="coach.firstName"
+          :lastName="coach.lastName"
+          :hourlyRate="coach.hourlyRate"
+          :areas="coach.areas"
+        />
+      </ul>
 
-    <h3 v-else>No coaches</h3>
-  </section>
+      <h3 v-else>No coaches</h3>
+    </section>
+  </div>
 </template>
 
 <script>
