@@ -12,20 +12,22 @@ export default {
     };
 
     // HTTP request
+    const token = context.rootGetters.token;
+
     const res = await fetch(
-      `https://devmeetup-vue-26ab8.firebaseio.com/coaches/${userId}.json`,
+      `https://devmeetup-vue-26ab8.firebaseio.com/coaches/${userId}.json?auth=${token}`,
       {
         method: "PUT",
         body: JSON.stringify(coachData),
       }
     );
 
-    console.log("aaRes", res);
-
     // const data = await res.json();
 
     if (!res.ok) {
       // error
+      const error = new Error(res.message || "Something went wrong. Try again");
+      throw error;
     }
 
     context.commit("registerCoach", { ...coachData, id: userId });

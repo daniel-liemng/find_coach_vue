@@ -36,8 +36,10 @@ export default {
   async fetchRequests(context) {
     const coachId = context.rootGetters.userId;
 
+    const token = context.rootGetters.token;
+
     const res = await fetch(
-      `https://devmeetup-vue-26ab8.firebaseio.com/requests/${coachId}.json`
+      `https://devmeetup-vue-26ab8.firebaseio.com/requests/${coachId}.json?auth=${token}`
     );
 
     const data = await res.json();

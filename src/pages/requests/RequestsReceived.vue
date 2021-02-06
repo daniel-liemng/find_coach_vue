@@ -78,7 +78,7 @@ export default {
   color: red;
   font-weight: bold;
   padding: 0.5rem 1rem;
-  margin: 1rem;
+  margin: 0;
   width: 50%;
 }
 </style>
