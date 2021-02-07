@@ -36,6 +36,15 @@
               >Login</router-link
             >
           </li>
+          <li v-if="isLoggedIn" class="nav-item">
+            <button
+              @click="logout"
+              class="nav-link active logout-btn"
+              aria-current="page"
+            >
+              Log Out
+            </button>
+          </li>
         </ul>
       </div>
     </div>
@@ -49,7 +58,18 @@ export default {
       return this.$store.getters.isAuthenticated;
     },
   },
+  methods: {
+    logout() {
+      this.$store.dispatch("logout");
+    },
+  },
 };
 </script>
 
-<style></style>
+<style scoped>
+.logout-btn {
+  border: none;
+  outline: none;
+  background: transparent;
+}
+</style>
