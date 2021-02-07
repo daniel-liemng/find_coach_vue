@@ -10,10 +10,11 @@
 <script>
 import Header from "./components/layout/Header";
 export default {
-  setup() {
-    return {
-      Header,
-    };
+  components: {
+    Header,
+  },
+  created() {
+    this.$store.dispatch("autoLogin");
   },
 };
 </script>
