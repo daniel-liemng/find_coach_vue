@@ -11,15 +11,18 @@
 
         <div class="m-1"></div>
 
-        <router-link v-if="!isLoggedIn" to="/auth" class="btn btn-success"
-          >Login</router-link
+        <router-link
+          v-if="!isLoggedIn"
+          to="/auth?redirect=register"
+          class="btn btn-success"
+          >Login to Register as a Coach</router-link
         >
 
         <router-link
           v-if="isLoggedIn && !isCoach && !isLoading"
           to="/register"
           class="btn btn-success"
-          >Register a coach</router-link
+          >Register as a Coach</router-link
         >
       </div>
 

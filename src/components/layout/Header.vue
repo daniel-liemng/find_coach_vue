@@ -61,6 +61,9 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch("logout");
+
+      // redirect
+      this.$router.replace("/coaches");
     },
   },
 };
