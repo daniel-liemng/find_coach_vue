@@ -23,12 +23,17 @@
               >Coaches</router-link
             >
           </li>
-          <li class="nav-item">
+          <li v-if="isLoggedIn" class="nav-item">
             <router-link
               class="nav-link active"
               aria-current="page"
               to="/requests"
               >Requests</router-link
+            >
+          </li>
+          <li v-else class="nav-item">
+            <router-link class="nav-link active" aria-current="page" to="/auth"
+              >Login</router-link
             >
           </li>
         </ul>
@@ -38,7 +43,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
+    },
+  },
+};
 </script>
 
 <style></style>

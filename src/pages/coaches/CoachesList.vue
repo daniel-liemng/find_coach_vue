@@ -4,12 +4,19 @@
       <CoachFilter @change-filter="setFilters" />
     </section>
     <section class="list-section container bg-light">
-      <div class="d-flex justify-content-around mb-5">
+      <div class="d-flex mb-3">
         <button class="btn btn-success" @click="loadCoaches(true)">
           Refresh
         </button>
+
+        <div class="m-1"></div>
+
+        <router-link v-if="!isLoggedIn" to="/auth" class="btn btn-success"
+          >Login</router-link
+        >
+
         <router-link
-          v-if="!isCoach && !isLoading"
+          v-if="isLoggedIn && !isCoach && !isLoading"
           to="/register"
           class="btn btn-success"
           >Register a coach</router-link
@@ -64,6 +71,10 @@ export default {
     };
   },
   computed: {
+    isLoggedIn() {
+      // auth has no namespace -> access getters directly
+      return this.$store.getters.isAuthenticated;
+    },
     filteredCoaches() {
       // coaches: 1st is namespace in store, 2nd is the getters name
       // return this.$store.getters["coaches/coaches"];
